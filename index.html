@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>알림 테스트</title></head>
+<body>
+<button id="btn">실제 알림 보내기</button>
+<script>
+document.getElementById('btn').onclick=()=>{
+  if(Notification.permission==="granted"){
+    new Notification("Google",{
+      body:"새로운 로그인 감지: Galaxy S24에서 로그인되었습니다.",
+      requireInteraction:true,
+      renotify:true,
+      tag:"test"
+    });
+    navigator.vibrate([120,80,120]);
+  }else{
+    Notification.requestPermission().then(p=>{
+      if(p==="granted"){
+        new Notification("Google",{body:"권한 허용됨",requireInteraction:true});
+      }else{
+        alert("알림 권한이 허용되지 않았습니다.");
+      }
+    });
+  }
+};
+</script>
+</body>
+</html>
